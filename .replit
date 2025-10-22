@@ -1,11 +1,34 @@
 entrypoint = "main.clj"
 
 hidden = [".clj-kondo", ".lsp", ".config"]
-
-modules = ["clojure-1.11"]
+modules = ["clojure-1.11", "clojure-1.12"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["clojure"]
 
 [agent]
 expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Run Clojure"
+
+[[workflows.workflow]]
+name = "Run Clojure"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "clojure -M main.clj"
+
+[workflows.workflow.metadata]
+outputType = "console"

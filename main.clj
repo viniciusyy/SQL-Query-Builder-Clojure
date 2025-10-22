@@ -146,3 +146,5 @@
                          {:campo :camiseta :igual_a :azul}])]))
              (gerar))]
     (println sql)))
+
+(-main)
