@@ -4,7 +4,6 @@
 ;; -----------------------------
 ;; Utilidades de formatação SQL
 ;; -----------------------------
-;; nada de efeitos colaterais aqui, só transformar dado em string segura
 
 (defn- sql-escape [s]
   ;; escapa apóstrofo: O'Brien -> O''Brien
@@ -26,7 +25,7 @@
   (str "(" s ")"))
 
 (defn- strip-parens [s]
-  ;; remove parênteses externos do WHERE top-level (só para estética)
+  ;; remove parênteses externos do WHERE top-level
   (let [s (str/trim s)]
     (if (and (<= 2 (count s))
              (= \( (first s))
@@ -125,7 +124,6 @@
 ;; ---------------------------------------------------
 ;; Helpers com currying (qual operador? qual campo? valor?)
 ;; ---------------------------------------------------
-;; fica bem gostoso de compor: ((maior-que :idade) 20)
 
 (defn cmp [op]
   (fn [campo]
@@ -148,7 +146,6 @@
 ;; ----------------
 ;; Demo (-main)
 ;; ----------------
-;; rodando imprime a SQL do exemplo; bom para testar rápido
 
 (defn -main [& _]
   (let [sql ((busca_tabela "usuario")
@@ -163,3 +160,4 @@
                          {:campo :camiseta :igual_a :azul}])]))
              (gerar))]
     (println sql)))
+(-main)
